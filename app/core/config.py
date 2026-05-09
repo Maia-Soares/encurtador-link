@@ -22,6 +22,16 @@ class Settings(BaseSettings):
     REDIS_PORT: int = 6379
 
     CACHE_TTL_SECONDS: int = 3600
+    REDIS_URL: str | None = None
+    REDIS_HOST: str = "localhost"
+    REDIS_PORT: int = 6379
+    CACHE_TTL_SECONDS: int = 3600
+
+    @property
+    def redis_url(self) -> str:
+        if self.REDIS_URL:
+            return self.REDIS_URL
+        return f"redis://{self.REDIS_HOST}:{self.REDIS_PORT}"
 
 
 settings = Settings()
