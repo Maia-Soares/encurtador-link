@@ -14,8 +14,8 @@ jobs:
       postgres:
         image: postgres:15-alpine
         env:
-          POSTGRES_USER: ${secrets.DB_USER_ENCURTADOR}
-          POSTGRES_PASSWORD: ${secrets.DB_PASSWORD_ENCURTADOR}
+          POSTGRES_USER: ${{secrets.DB_USER_ENCURTADOR}}
+          POSTGRES_PASSWORD: ${{secrets.DB_PASSWORD_ENCURTADOR}}
           POSTGRES_DB: url_shortener_db
         ports: ["5432:5432"]
         options: >-
@@ -53,8 +53,8 @@ jobs:
 
       - name: Run tests with coverage
         env:
-          DB_USER: ${secrets.DB_USER_ENCURTADOR}
-          DB_PASSWORD: ${secrets.DB_PASSWORD_ENCURTADOR}
+          DB_USER: ${{secrets.DB_USER_ENCURTADOR}}
+          DB_PASSWORD: ${{secrets.DB_PASSWORD_ENCURTADOR}}
           DB_NAME: url_shortener_db
           DB_HOST: localhost
           DB_PORT: 5432
