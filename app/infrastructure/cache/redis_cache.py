@@ -2,10 +2,7 @@ import json
 import redis
 from typing import Any, Optional
 from redis.cluster import logger
-from uvicorn import logging
 from app.domain.cache import CacheInterface
-
-logger = logging.getLogger(__name__)
 
 
 class RedisCacheAdapter(CacheInterface):
