@@ -3,6 +3,7 @@ from app.domain.entities import Link
 from app.domain.repositories import LinkRepositoryInterface
 from app.domain.validators import validate_url, generate_slug
 
+
 class ShortenUrlUseCase:
     def __init__(self, repo: LinkRepositoryInterface):
         self.repo = repo
@@ -12,7 +13,7 @@ class ShortenUrlUseCase:
         slug = generate_slug()
         link = Link(
             slug=slug,
-            original_url=url,
+            original_url=str(url),
             expires_at=expires_at,
             created_at=datetime.utcnow()
         )

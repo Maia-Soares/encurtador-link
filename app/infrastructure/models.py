@@ -6,9 +6,8 @@ class Base(DeclarativeBase):
     pass
 
 
-class Link(Base):
+class LinkModel(Base):
     __tablename__ = "links"
-
     id = Column(Integer, primary_key=True, index=True)
     slug = Column(String(8), unique=True, nullable=False, index=True)
     original_url = Column(String, nullable=False)

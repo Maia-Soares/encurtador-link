@@ -4,7 +4,7 @@ from app.core.config import settings
 from app.infrastructure.db import SessionLocal, engine
 from app.infrastructure.repositories.sqlalchemy_repo import SqlAlchemyLinkRepository
 from app.infrastructure.cache.redis_cache import RedisCacheAdapter
-from app.infrastructure.cache import redis_client  
+from app.infrastructure.cache_client import redis_client
 from app.application.use_cases.shorten_url import ShortenUrlUseCase
 from app.application.use_cases.redirect_url import RedirectUrlUseCase
 from app.application.use_cases.get_stats import GetStatsUseCase
@@ -16,6 +16,7 @@ from collections.abc import Iterator
 
 app = FastAPI(title="Encurtador de URL", version="1.0.0")
 
+
 def get_db() -> Iterator[Session]:
     db = SessionLocal()
     try:
@@ -23,35 +24,43 @@ def get_db() -> Iterator[Session]:
     finally:
         db.close()
 
+
 def get_repo(db: Session = Depends(get_db)):
     return SqlAlchemyLinkRepository(db)
+
 
 def get_cache():
     return RedisCacheAdapter(redis_client, ttl_seconds=settings.CACHE_TTL_SECONDS)
 
-def get_shorten_uc(repo = Depends(get_repo)):
+
+def get_shorten_uc(repo=Depends(get_repo)):
     return ShortenUrlUseCase(repo)
 
-def get_redirect_uc(repo = Depends(get_repo), cache = Depends(get_cache)):
+
+def get_redirect_uc(repo=Depends(get_repo), cache=Depends(get_cache)):
     return RedirectUrlUseCase(repo, cache, settings.CACHE_TTL_SECONDS)
 
-def get_stats_uc(repo = Depends(get_repo)):
+
+def get_stats_uc(repo=Depends(get_repo)):
     return GetStatsUseCase(repo)
 
-def get_delete_uc(repo = Depends(get_repo), cache = Depends(get_cache)):
+
+def get_delete_uc(repo=Depends(get_repo), cache=Depends(get_cache)):
     return DeleteLinkUseCase(repo, cache)
 
+
 @app.post("/shorten",
-        summary="Encurta uma URL",
-        description="Gera um slug único de 8 caracteres e retorna o link curto. Aceita expiração opcional.",
-        response_model=LinkResponse,
-        tags=["Links"])
+          summary="Encurta uma URL",
+          description="Gera um slug único de 8 caracteres e retorna o link curto. Aceita expiração opcional.",
+          response_model=LinkResponse,
+          tags=["Links"])
 def shorten(url_data: ShortenRequest, uc: ShortenUrlUseCase = Depends(get_shorten_uc)):
     try:
         link = uc.execute(url_data.url, url_data.expires_at)
         return {"short_url": f"/{link.slug}", "slug": link.slug}
     except InvalidURLError as e:
         raise HTTPException(status_code=400, detail=str(e))
+
 
 @app.get("/{slug}",
          summary="Redireciona para a URL original",
@@ -67,6 +76,7 @@ def redirect(slug: str, uc: RedirectUrlUseCase = Depends(get_redirect_uc)):
     except LinkExpiredError:
         raise HTTPException(status_code=410, detail="Link expirado")
 
+
 @app.get("/{slug}/stats",
          summary="Estatísticas de um link",
          description="Retorna dados do link: URL original, criação, expiração, total de cliques e último acesso.",
@@ -76,6 +86,7 @@ def stats(slug: str, uc: GetStatsUseCase = Depends(get_stats_uc)):
         return uc.execute(slug)
     except SlugNotFoundError:
         raise HTTPException(status_code=404, detail="Link não encontrado")
+
 
 @app.delete("/{slug}",
             summary="Remove um link",

@@ -1,4 +1,3 @@
-
 import re
 import string
 import random
@@ -12,10 +11,12 @@ URL_REGEX = re.compile(
     r'(?::\d+)?'
     r'(?:/?|[/?]\S+)$', re.IGNORECASE)
 
+
 def validate_url(url: str) -> str:
-    if not URL_REGEX.match(url):
+    if not URL_REGEX.match(str(url)):
         raise InvalidURLError(f"URL inválida: {url}")
     return url
+
 
 def generate_slug() -> str:
     charset = string.ascii_letters + string.digits
