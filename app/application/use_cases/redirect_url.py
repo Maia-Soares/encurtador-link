@@ -1,4 +1,3 @@
-import json
 from datetime import datetime
 from app.domain.entities import Link
 from app.domain.repositories import LinkRepositoryInterface

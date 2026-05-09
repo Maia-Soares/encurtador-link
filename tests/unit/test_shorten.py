@@ -1,4 +1,3 @@
-from datetime import datetime
 from unittest.mock import Mock
 import pytest
 from app.application.use_cases.shorten_url import ShortenUrlUseCase

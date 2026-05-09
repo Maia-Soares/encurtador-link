@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException, Response
 from sqlalchemy.orm import Session
 from app.core.config import settings
-from app.infrastructure.db import SessionLocal, engine
+from app.infrastructure.db import SessionLocal
 from app.infrastructure.repositories.sqlalchemy_repo import SqlAlchemyLinkRepository
 from app.infrastructure.cache.redis_cache import RedisCacheAdapter
 from app.infrastructure.cache_client import redis_client
@@ -11,7 +11,6 @@ from app.application.use_cases.get_stats import GetStatsUseCase
 from app.application.use_cases.delete_link import DeleteLinkUseCase
 from app.domain.exceptions import InvalidURLError, SlugNotFoundError, LinkExpiredError
 from app.interface.schemas import ShortenRequest, LinkResponse
-import redis
 from collections.abc import Iterator
 
 app = FastAPI(title="Encurtador de URL", version="1.0.0")
