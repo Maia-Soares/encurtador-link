@@ -3,6 +3,7 @@ from app.domain.entities import Link
 from app.domain.repositories import LinkRepositoryInterface
 from app.infrastructure.models import LinkModel
 
+
 class SqlAlchemyLinkRepository(LinkRepositoryInterface):
     def __init__(self, db: Session):
         self.db = db
@@ -18,13 +19,17 @@ class SqlAlchemyLinkRepository(LinkRepositoryInterface):
                     setattr(db_link, key, value)
         self.db.commit()
         self.db.refresh(db_link)
-        return Link(**{k: v for k, v in db_link.__dict__.items() if k != '_sa_instance_state'})
+        return Link(
+            **{k: v for k, v in db_link.__dict__.items() if k != "_sa_instance_state"}
+        )
 
     def get_by_slug(self, slug: str) -> Link | None:
         db_link = self.db.query(LinkModel).filter(LinkModel.slug == slug).first()
         if not db_link:
             return None
-        return Link(**{k: v for k, v in db_link.__dict__.items() if k != '_sa_instance_state'})
+        return Link(
+            **{k: v for k, v in db_link.__dict__.items() if k != "_sa_instance_state"}
+        )
 
     def delete(self, slug: str) -> None:
         self.db.query(LinkModel).filter(LinkModel.slug == slug).delete()

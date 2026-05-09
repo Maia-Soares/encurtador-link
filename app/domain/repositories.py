@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from app.domain.entities import Link
 from typing import Optional
 
+
 class LinkRepositoryInterface(ABC):
     @abstractmethod
     def save(self, link: Link) -> Link: ...

@@ -4,12 +4,14 @@ import random
 from app.domain.exceptions import InvalidURLError
 
 URL_REGEX = re.compile(
-    r'^(?:http|https|ftp)://'
-    r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'
-    r'localhost|'
-    r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'
-    r'(?::\d+)?'
-    r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+    r"^(?:http|https|ftp)://"
+    r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|"
+    r"localhost|"
+    r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"
+    r"(?::\d+)?"
+    r"(?:/?|[/?]\S+)$",
+    re.IGNORECASE,
+)
 
 
 def validate_url(url: str) -> str:
@@ -20,4 +22,4 @@ def validate_url(url: str) -> str:
 
 def generate_slug() -> str:
     charset = string.ascii_letters + string.digits
-    return ''.join(random.choices(charset, k=8))
+    return "".join(random.choices(charset, k=8))

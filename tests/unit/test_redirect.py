@@ -10,7 +10,8 @@ def test_redirect_cache_hit():
     repo = Mock()
     cache = Mock()
     cached_link = Link(
-        slug="test1234", original_url="https://google.com", click_count=0)
+        slug="test1234", original_url="https://google.com", click_count=0
+    )
     cache.get.return_value = cached_link.__dict__
     cache.get.return_value["expires_at"] = None
 
@@ -39,7 +40,7 @@ def test_redirect_expired():
     expired = Link(
         slug="exp12345",
         original_url="https://x.com",
-        expires_at=datetime.utcnow() - timedelta(hours=1)
+        expires_at=datetime.utcnow() - timedelta(hours=1),
     )
     cache.get.return_value = expired.__dict__
     cache.get.return_value["expires_at"] = expired.expires_at

@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, Optional
 
+
 class CacheInterface(ABC):
     @abstractmethod
     def get(self, key: str) -> Optional[dict[str, Any]]: ...

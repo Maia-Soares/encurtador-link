@@ -20,7 +20,7 @@ target_metadata = Base.metadata
 
 config.set_main_option(
     "sqlalchemy.url",
-    f"postgresql://{app_settings.DB_USER}:{app_settings.DB_PASSWORD}@{app_settings.DB_HOST}:{app_settings.DB_PORT}/{app_settings.DB_NAME}"
+    f"postgresql://{app_settings.DB_USER}:{app_settings.DB_PASSWORD}@{app_settings.DB_HOST}:{app_settings.DB_PORT}/{app_settings.DB_NAME}",
 )
 
 
@@ -47,9 +47,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()

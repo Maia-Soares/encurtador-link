@@ -4,8 +4,14 @@ from app.domain.repositories import LinkRepositoryInterface
 from app.domain.cache import CacheInterface
 from app.domain.exceptions import SlugNotFoundError, LinkExpiredError
 
+
 class RedirectUrlUseCase:
-    def __init__(self, repo: LinkRepositoryInterface, cache: CacheInterface, ttl_seconds: int = 3600):
+    def __init__(
+        self,
+        repo: LinkRepositoryInterface,
+        cache: CacheInterface,
+        ttl_seconds: int = 3600,
+    ):
         self.repo = repo
         self.cache = cache
         self.ttl_seconds = ttl_seconds
@@ -25,7 +31,7 @@ class RedirectUrlUseCase:
 
         link.click_count += 1
         link.last_accessed = datetime.utcnow()
-        
+
         self.repo.save(link)
         self.cache.set(slug, link.__dict__, self.ttl_seconds)
 

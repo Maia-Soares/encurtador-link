@@ -15,6 +15,6 @@ class ShortenUrlUseCase:
             slug=slug,
             original_url=str(url),
             expires_at=expires_at,
-            created_at=datetime.utcnow()
+            created_at=datetime.utcnow(),
         )
         return self.repo.save(link)

@@ -7,8 +7,7 @@ from app.domain.entities import Link
 
 def test_shorten_valid_url():
     repo = Mock()
-    repo.save.return_value = Link(
-        slug="aB3cD9eF", original_url="https://google.com")
+    repo.save.return_value = Link(slug="aB3cD9eF", original_url="https://google.com")
 
     uc = ShortenUrlUseCase(repo)
     result = uc.execute("https://google.com")

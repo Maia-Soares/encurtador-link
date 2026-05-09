@@ -15,7 +15,7 @@ def test_get_stats_success():
         created_at=agora,
         expires_at=None,
         click_count=7,
-        last_accessed=agora
+        last_accessed=agora,
     )
     repo.get_by_slug.return_value = link
 

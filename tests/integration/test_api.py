@@ -32,8 +32,7 @@ def test_fluxo_completo_encurtar_redirecionar_deletar():
 
     resp = client.get(f"/{slug}", follow_redirects=False)
     assert resp.status_code == 301
-    assert resp.headers["Location"].rstrip(
-        "/") == "https://github.com".rstrip("/")
+    assert resp.headers["Location"].rstrip("/") == "https://github.com".rstrip("/")
 
     resp = client.get(f"/{slug}/stats")
     assert resp.status_code == 200
@@ -50,7 +49,9 @@ def test_fluxo_completo_encurtar_redirecionar_deletar():
 def test_link_com_expiracao_retorna_302_e_410():
     expires_in = datetime.utcnow() + timedelta(seconds=5)
     resp = client.post(
-        "/shorten", json={"url": "https://python.org", "expires_at": expires_in.isoformat()})
+        "/shorten",
+        json={"url": "https://python.org", "expires_at": expires_in.isoformat()},
+    )
     slug = resp.json()["slug"]
 
     resp = client.get(f"/{slug}", follow_redirects=False)
