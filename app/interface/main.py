@@ -67,7 +67,13 @@ def shorten(url_data: ShortenRequest, uc: ShortenUrlUseCase = Depends(get_shorte
     "/{slug}",
     summary="Redireciona para a URL original",
     description="Redireciona o usuário para a URL original associada ao slug fornecido.",
-    tags=["Links"],
+    responses={
+        301: {"description": "Redirect permanente"},
+        302: {"description": "Redirect temporário (link com expiração)"},
+        404: {"description": "Slug não encontrado"},
+        410: {"description": "Link expirado"}
+    },
+    tags=["Redirects"],
 )
 def redirect(slug: str, uc: RedirectUrlUseCase = Depends(get_redirect_uc)):
     try:
