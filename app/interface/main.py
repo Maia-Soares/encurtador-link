@@ -71,7 +71,7 @@ def shorten(url_data: ShortenRequest, uc: ShortenUrlUseCase = Depends(get_shorte
         301: {"description": "Redirect permanente"},
         302: {"description": "Redirect temporário (link com expiração)"},
         404: {"description": "Slug não encontrado"},
-        410: {"description": "Link expirado"}
+        410: {"description": "Link expirado"},
     },
     tags=["Redirects"],
 )
