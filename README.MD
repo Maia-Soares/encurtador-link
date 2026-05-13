@@ -61,7 +61,8 @@ crie o arquivo env com suas credenciais locais
 docker compose up -d
 ```
 
-4. Aplique Migrations e Suba a API
+### 4. Aplique Migrations e Suba a API
+```bash
 alembic upgrade head
 uvicorn app.interface.main:app --reload --host 0.0.0.0 --port 8000
 ```
