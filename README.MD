@@ -41,7 +41,7 @@ O projeto segue **Clean Architecture**, garantindo independência de frameworks 
 ### 2. Configuração
 ```bash
 # Clone e acesse o projeto
-git clone https://github.com/SEU_USUARIO/encurtador-link.git
+git clone https://github.com/Maia-Soares/encurtador-link.git
 cd encurtador-link
 
 # Crie e ative o ambiente virtual
@@ -59,12 +59,6 @@ crie o arquivo env com suas credenciais locais
 ### 3. Inicie a Infraestrutura
 ```bash
 docker compose up -d
-```
-
-### 4. Aplique Migrations e Suba a API
-```bash
-alembic upgrade head
-uvicorn app.interface.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ⭐Acesse a documentação interativa: http://localhost:8000/docs
