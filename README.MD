@@ -85,6 +85,13 @@ O endpoint `GET /{slug}` retorna status `301` ou `302` com cabeçalho `Location`
 2. Cole diretamente na barra de endereços do navegador, ou
 3. Use o terminal: `curl -I https://SEU-APP.onrender.com/{slug}`
 
+## 🌐 Demo ao Vivo
+API rodando em produção: https://encurtador-link-dl1s.onrender.com
+
+📖 Documentação interativa (Swagger): **https://encurtador-link-dl1s.onrender.com/docs**
+
+⚠️ *Importante: O serviço utiliza plano gratuito (Render), que entra em "cold start" após inatividade. O primeiro acesso pode levar ~10-15s para inicializar. Isso é um comportamento esperado da plataforma e não reflete na performance da arquitetura.*
+
 ## 📬 Autor
 Desenvolvido com foco em boas práticas, testabilidade e escalabilidade.  
- ![LinkedIn](https://www.linkedin.com/in/maiisoares/) | 📧 ![Email](maiana.a.soares@gmail.com)
+ [LinkedIn](https://www.linkedin.com/in/maiisoares/) | 📧 [Email](maiana.a.soares@gmail.com)
