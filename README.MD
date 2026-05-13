@@ -83,9 +83,9 @@ O endpoint `GET /{slug}` retorna status `301` ou `302` com cabeçalho `Location`
 ✅ **Isso não é um erro da API.** O redirecionamento funciona perfeitamente. Para validar:
 1. Copie o slug retornado pelo `POST /shorten`
 2. Cole diretamente na barra de endereços do navegador, ou
-3. Use o terminal: `curl -I https://SEU-APP.onrender.com/{slug}`
+3. Use o terminal: `curl -I https://encurtador-link-dl1s.onrender.com/{slug}`
 
-## 🌐 Demo ao Vivo
+## 🌐 Deploy
 API rodando em produção: https://encurtador-link-dl1s.onrender.com
 
 📖 Documentação interativa (Swagger): **https://encurtador-link-dl1s.onrender.com/docs**
